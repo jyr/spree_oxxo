@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  <%= t('oxxo.import_orders') %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+
+<script>
+  $(".tab-with-icon:eq(1)").addClass("selected");
+</script>
