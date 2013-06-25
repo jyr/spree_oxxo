@@ -2,3 +2,8 @@ es:
   oxxo: 
     title: 'Oxxo'
     import_orders: 'Importar Ordenes'
+    form:
+      import:
+        heading: 'Import Order from CSV'
+        new:
+          file: 'Order Data File'

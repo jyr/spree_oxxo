@@ -3,7 +3,45 @@
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+<%= render "spree/shared/error_messages", :target => @oxxo %>
 
+<%= form_for([:admin, @oxxo], :method => :post, :html => { :multipart => true }) do |f| %>
+  <fieldset>
+    <%= f.field_container :oxxo_file do%>
+      <%= f.label :oxxo_file, t('oxxo.form.import.new.file') %>
+      <%= f.file_field :oxxo_file %>
+      <%= f.error_message_on :oxxo_file %>
+    <% end %>
+  </fieldset>
+  <p class='form-buttons'>
+    <%= button t('actions.create') %>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th><%= t('oxxo.table.oxxo_files.title.date_creation')%></th>
+    <th><%= t('oxxo.table.oxxo_files.title.csv_name')%></th>
+    <th><%= t('oxxo.table.oxxo_files.title.status')%></th>
+    <th><%= t('oxxo.table.oxxo_files.title.date_status')%></th>
+    <th><%= t('oxxo.table.oxxo_files.title.orders_imported')%></th>
+    <th><%= t('oxxo.table.oxxo_files.title.actions')%></th>
+  </tr>
+  <% Spree::Oxxo.order('created_at DESC').all.each do |order_imported| %>
+    <tr>
+      <td><%= time_ago_in_words order_imported.created_at, true %> ago</td>
+      <td><%= order_imported.oxxo_file_file_name %></td>
+      <td><%= t(order_imported.state, :scope => "oxxo.state") -%></td>
+      <td><%= time_ago_in_words order_imported.state_datetime -%> ago</td>
+      <td><%= order_imported.order_ids.size -%></td>
+      <td>
+        <%= link_to 'Show', admin_oxxo_path(order_imported) -%>
+        &nbsp;
+        <%= link_to 'Delete', admin_oxxo_path(order_imported), :method => :delete, :confirm => t('oxxo.confirm_delete') -%>
+      </td>
+    </tr>
+  <% end %>
+</table>
 <script>
   $(".tab-with-icon:eq(1)").addClass("selected");
 </script>

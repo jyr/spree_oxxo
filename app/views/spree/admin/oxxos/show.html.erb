@@ -1,0 +1,38 @@
+<% content_for :page_title %>
+  <%= t('show_order_oxxo') %>
+<% end %>
+
+
+<%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+<% content_for :page_actions do %>
+	<div class="toolbar" data-hook="toolbar">
+		<ul class="actions">
+			<li id="delete_order_oxxo">
+			<%= button_link_to t(:delete_order_oxxo), admin_oxxo_path(@oxxo), {:method => :delete, :icon => 'icon-minus', :confirm => t("confirm_delete_order_oxxo")} %>
+			</li>
+		</ul>
+		<br class="clear" />
+  </div>
+<% end %>
+
+<table class="index" id="listing_orders">
+  <tr data-hook="admin_orders_index_headers">
+    <th><%= t(:number) %></th>
+    <th><%= t(:barcode) %></th>
+    <th><%= t(:master_price) %></th>
+    <th data-hook="admin_orders_index_header_actions"></th>
+  </tr>
+<% @orders.each do |order| %>
+  <tr <%= "style='color: red;'" if order.deleted? %> id="<%= dom_id order %>" data-hook="admin_orders_index_rows">
+    <td><%= order.number rescue '' %></td>
+    <td><%= order.payment.barcode rescue '' %></td>
+    <td><%= number_to_currency order.price rescue '' %></td>
+    <td class="actions" data-hook="admin_orders_index_row_actions">
+      <%= link_to "Edit", edit_admin_order_path(order), :class => 'edit' unless order.deleted? %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<script>
+	$(".tab-with-icon:eq(2)").addClass("selected");
+</script>

@@ -3,5 +3,21 @@
 
 en:
   oxxo: 
+    confirm_delete: "Deleting this import will delete all the order associated, are you sure ?"
     title: 'Oxxo'
     import_orders: 'Import Orders'
+    form:
+      import:
+        heading: 'Import Order form CSV'
+        new:
+          file: 'Order Data File'
+
+    table:
+      oxxo_files:
+        title:
+          date_creation: 'Date Creation'
+          csv_name: 'CSV Name'
+          status: 'Status'
+          date_status: 'Date Status'
+          orders_imported: 'Orders Imported'
+          actions: 'Actions'

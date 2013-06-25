@@ -4,10 +4,20 @@ SpreeOxxo
 Introduction goes here.
 
 
-Example
-=======
+Install
+-------
 
-Example goes here.
+    bundle exec rails g spree_oxxo:install
+    
+Delayed Job
+-----------
+	bundle exec rails generate delayed_job
+	bundle exec rails generate delayed_job:active_record
+	bundle exec rake db:migrate
+	bundle exec rake jobs:work
+	bundle exec rake jobs:clean
+	
+
 
 Testing
 -------
