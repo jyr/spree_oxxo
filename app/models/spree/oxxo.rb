@@ -1,4 +1,6 @@
 module Spree
+  class ImportError < StandardError; end;
+
   class Oxxo < ActiveRecord::Base
     attr_accessible :oxxo_file
     has_attached_file :oxxo_file, 
@@ -94,6 +96,25 @@ module Spree
     def check_order_paid(order)
       log "\n Order to pay \n"
       log "\n #{pp order} \n\n"
+      payment = Spree::Payment.find_by_barcode(_barcode(order))
+      begin
+        unless payment.state == "completed"
+          payment.complete!
+          Spree::OrderUpdater.new(payment.order).update_payment_state
+        end
+      rescue
+        log "Not exists your order"
+      end
+    end
+
+    def _barcode order
+      if order[:rpu2].to_i > 1
+        code = (order[:rpu1] + order[:rpu2]).gsub(' ', '')
+        last_position = code.index('0000000000')
+        code[0..last_position - 1]
+      else
+        order[:rpu1]
+      end
     end
 
 		def _tempfile name, extension, data
