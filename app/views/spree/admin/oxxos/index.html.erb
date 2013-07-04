@@ -36,8 +36,6 @@
       <td><%= order_imported.order_ids.size -%></td>
       <td>
         <%= link_to 'Show', admin_oxxo_path(order_imported) -%>
-        &nbsp;
-        <%= link_to 'Delete', admin_oxxo_path(order_imported), :method => :delete, :confirm => t('oxxo.confirm_delete') -%>
       </td>
     </tr>
   <% end %>

@@ -15,6 +15,9 @@ module Spree
     def orders
       Spree::Order.where :id => order_ids
     end
+    
+    include Spree::Core::S3Support
+    supports_s3 :oxxo_file
 
     require 'csv'
     require 'pp'
@@ -74,7 +77,7 @@ module Spree
       unless Spree::Oxxo.settings[:aws]
         rows = CSV.read(self.oxxo_file.path)
       else
-        _tempile 'import', 'csv', open(self.oxxo_file.url).read
+        _tempfile 'import', 'csv', open(self.oxxo_file.url).read
         csv_file = "#{Rails.root}/tmp/import_oxxo_csv_#{Process.pid}"
         rows = CSV.read(csv_file)
       end
