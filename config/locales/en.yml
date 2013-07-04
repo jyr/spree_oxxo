@@ -3,6 +3,10 @@
 
 en:
   oxxo: 
+    order_processing: 'Thanks, your import has been added to the queue for processing. You will receive an email confirming the import once it has completed.'
+    show_order: 'Show Order'
+    delete_order: "Delete"
+    delete_order_successful: "Import and orders associated deleted successfully"
     confirm_delete: "Deleting this import will delete all the order associated, are you sure ?"
     title: 'Oxxo'
     import_orders: 'Import Orders'

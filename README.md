@@ -15,7 +15,7 @@ Delayed Job
 	bundle exec rails generate delayed_job:active_record
 	bundle exec rake db:migrate
 	bundle exec rake jobs:work
-	bundle exec rake jobs:clean
+	bundle exec rake jobs:clear
 	
 
 

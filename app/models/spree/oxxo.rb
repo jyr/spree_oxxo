@@ -12,6 +12,10 @@ module Spree
 
     cattr_accessor :settings
 
+    def orders
+      Spree::Order.where :id => order_ids
+    end
+
     require 'csv'
     require 'pp'
     require 'open-uri'
@@ -96,14 +100,16 @@ module Spree
     def check_order_paid(order)
       log "\n Order to pay \n"
       log "\n #{pp order} \n\n"
-      payment = Spree::Payment.find_by_barcode(_barcode(order))
+      code = _barcode(order)
+      payment = Spree::Payment.find_by_barcode(code)
       begin
         unless payment.state == "completed"
           payment.complete!
           Spree::OrderUpdater.new(payment.order).update_payment_state
         end
+        order_ids << payment.order.id
       rescue
-        log "Not exists your order"
+        log "Not exists #{code} order"
       end
     end
 

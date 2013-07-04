@@ -1,5 +1,10 @@
 es:
-  oxxo: 
+  oxxo:
+    order_processing: 'Gracias, su carga a sido agregada a la lista para ser procesada. Recibiras un mail de confirmación cuando la carga sea completada.'
+    show_order: 'Mostrar Ordenes'
+    delete_order: "Borrar"
+    delete_order_successful: "Su carga y ordenes asociadas fueron eliminados correctamente"
+    confirm_delete: "¿Desea borrar la carga y todos los productos asociados, estas seguro"
     title: 'Oxxo'
     import_orders: 'Importar Ordenes'
     form:
@@ -7,3 +12,12 @@ es:
         heading: 'Import Order from CSV'
         new:
           file: 'Order Data File'
+    table:
+      oxxo_files:
+        title:
+          date_creation: 'Fecha de creación'
+          csv_name: 'Nombre CSV'
+          status: 'Estatus'
+          date_status: 'Fecha del Estatus'
+          orders_imported: 'Ordenes Importadas'
+          actions: 'Acciones'

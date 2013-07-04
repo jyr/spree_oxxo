@@ -1,5 +1,5 @@
-<% content_for :page_title %>
-  <%= t('show_order_oxxo') %>
+<% content_for :page_title do %>
+  <%= t('oxxo.show_order') %>
 <% end %>
 
 
@@ -8,7 +8,7 @@
 	<div class="toolbar" data-hook="toolbar">
 		<ul class="actions">
 			<li id="delete_order_oxxo">
-			<%= button_link_to t(:delete_order_oxxo), admin_oxxo_path(@oxxo), {:method => :delete, :icon => 'icon-minus', :confirm => t("confirm_delete_order_oxxo")} %>
+			<%= button_link_to t(:delete_order_oxxo), admin_oxxo_path(@oxxo), {:method => :delete, :icon => 'icon-minus', :confirm => t("oxxo.confirm_delete")} %>
 			</li>
 		</ul>
 		<br class="clear" />
@@ -17,19 +17,27 @@
 
 <table class="index" id="listing_orders">
   <tr data-hook="admin_orders_index_headers">
-    <th><%= t(:number) %></th>
-    <th><%= t(:barcode) %></th>
-    <th><%= t(:master_price) %></th>
+    <th><%= t('oxxo.place') %></th>
+    <th><%= t('oxxo.store') %></th>
+    <th><%= t('oxxo.date') %></th>
+    <th><%= t('oxxo.time') %></th>
+    <th><%= t('oxxo.number') %></th>
+    <th><%= t('oxxo.barcode') %></th>
+    <th><%= t('oxxo.amount') %></th>
     <th data-hook="admin_orders_index_header_actions"></th>
   </tr>
-<% @orders.each do |order| %>
-  <tr <%= "style='color: red;'" if order.deleted? %> id="<%= dom_id order %>" data-hook="admin_orders_index_rows">
-    <td><%= order.number rescue '' %></td>
-    <td><%= order.payment.barcode rescue '' %></td>
-    <td><%= number_to_currency order.price rescue '' %></td>
-    <td class="actions" data-hook="admin_orders_index_row_actions">
-      <%= link_to "Edit", edit_admin_order_path(order), :class => 'edit' unless order.deleted? %>
-    </td>
+  <% @orders.each do |order| %>
+    <tr <%= "style='color: red;'" %> id="<%= dom_id order %>" data-hook="admin_orders_index_rows">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= order.number rescue '' %></td>
+      <td><%= order.payment.barcode rescue '' %></td>
+      <td><%= order.display_total rescue '' %></td>
+      <td class="actions" data-hook="admin_orders_index_row_actions">
+        <%= link_to "Edit", edit_admin_order_path(order), :class => 'edit' %>
+      </td>
   </tr>
 <% end %>
 </table>
